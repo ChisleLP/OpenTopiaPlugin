@@ -26,8 +26,8 @@ public class EssentialsHome implements Listener {
         if (command.startsWith("/sethome")) {
             String[] commandParts = command.split(" ");
             String homeName = (commandParts.length > 1) ? commandParts[1] : "";
-            Player player = (Player) event.getPlayer();
-            IUser iUser = (IUser) ess.getUser(player);
+            Player player = event.getPlayer();
+            IUser iUser = ess.getUser(player);
             List<String> homes = iUser.getHomes();
 
             if (homes.contains(homeName)){

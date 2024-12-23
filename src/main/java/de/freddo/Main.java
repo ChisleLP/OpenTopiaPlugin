@@ -6,8 +6,6 @@ import de.freddo.utiliy.FancyLogger;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-
 public class Main extends JavaPlugin implements Listener {
 
     private FancyLogger logger;
@@ -21,7 +19,10 @@ public class Main extends JavaPlugin implements Listener {
         logger = new FancyLogger(this);
         ess = (Essentials) getServer().getPluginManager().getPlugin("Essentials");
 
-        /*usersFile = new CustomYAML(this, "users.yml");
+        /*
+        Wird evtl. nützlich für die zukunft.
+
+        usersFile = new CustomYAML(this, "users.yml");
         if (!usersFile.getConfig().contains("players")) {
             usersFile.getConfig().set("players", new ArrayList<>());
             usersFile.save();

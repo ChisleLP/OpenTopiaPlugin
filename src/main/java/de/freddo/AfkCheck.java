@@ -92,13 +92,13 @@ public class AfkCheck implements Listener {
             final Essentials ess = plugin.getEss();
             @Override
             public void run() {
-                long currenTime = System.currentTimeMillis();
+                long currentTime = System.currentTimeMillis();
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     IUser iUser = ess.getUser(player.getUniqueId());
-                    if (!iUser.isAfk()) {;
-                        lastActivity.putIfAbsent(player.getUniqueId(), currenTime);
+                    if (!iUser.isAfk()) {
+                        lastActivity.putIfAbsent(player.getUniqueId(), currentTime);
                         final long lastTime = lastActivity.get(player.getUniqueId());
-                        if ((currenTime - lastTime) >= afkTimeout) {
+                        if ((currentTime - lastTime) >= afkTimeout) {
                             player.performCommand("afk");
                         }
                     }

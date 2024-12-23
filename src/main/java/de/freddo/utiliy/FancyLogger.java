@@ -12,7 +12,7 @@ public class FancyLogger {
     }
 
     private String getPrefix() {
-        return ChatColor.GRAY+ "["+ChatColor.GOLD+"Freddo"+ChatColor.BLACK+"Plugins"+ChatColor.GRAY+"] §r";
+        return ChatColor.GRAY+ "["+ChatColor.GOLD+"OpenTopia] §r";
     }
 
     public void log (String message) {

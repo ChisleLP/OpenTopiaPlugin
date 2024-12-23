@@ -1,0 +1,11 @@
+home:
+  moved: "§6Dein Zuhause wurde erfolgreich auf: %home% verschoben"
+
+afk:
+  events:
+    onPlayerMove: true #Update den Variable, sobald spieler sich bewegt.
+    onPlayerInteract: true #Update sobald der spieler mit Tür/TnT/usw interact.
+    onPlayerChat: true #Update sobald chat.
+    onPlayerCommand: true #update sobald commands
+    onPlayerBreak: false #update sobald blöcke zerstört
+    onPlayerPlace: false #update sobald blöcke plaziert

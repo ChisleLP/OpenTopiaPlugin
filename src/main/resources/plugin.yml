@@ -1,0 +1,9 @@
+main: de.freddo.Main
+name: OpenTopia
+version: '1.0'
+description: A test plugin
+author: Freddo
+prefix: OpenTopia
+api-version: 1.20
+depend:
+  - Essentials

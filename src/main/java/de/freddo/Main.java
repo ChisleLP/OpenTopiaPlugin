@@ -1,6 +1,7 @@
 package de.freddo;
 
 import com.earth2me.essentials.Essentials;
+import de.freddo.commands.OpenTopia;
 import de.freddo.commands.PipeID;
 import de.freddo.utiliy.*;
 import org.bukkit.event.Listener;
@@ -38,7 +39,13 @@ public class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new EssentialsHome(this), this);
         getServer().getPluginManager().registerEvents(new AfkCheck(this), this);
 
+        OpenTopia OT = new OpenTopia(this);
+        getServer().getPluginManager().registerEvents(OT, this);
+
+
+
         getCommand("pipeid").setExecutor(new PipeID(this));
+        getCommand("OpenTopia").setExecutor(OT);
     }
 
     public Essentials getEss() {

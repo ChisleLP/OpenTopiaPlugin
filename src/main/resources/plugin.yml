@@ -11,3 +11,5 @@ depend:
 commands:
   PipeID:
     desc: Get item ID
+  OpenTopia:
+    desc: Opentopia

@@ -21,16 +21,12 @@ public class LocalizationManager {
                 getClass().getResourceAsStream("/de_de.json"), "UTF-8")) {
             Type mapType = new TypeToken<Map<String, String>>() {}.getType();
             Map<String, String> translations = new Gson().fromJson(reader, mapType);
-
             for (Map.Entry<String, String> entry : translations.entrySet()) {
                 String key = entry.getKey();
                 String germanName = entry.getValue();
-
-                // Nur Items und Blöcke berücksichtigen
                 if (key.startsWith("item.minecraft.") || key.startsWith("block.minecraft.")) {
                     String minecraftId = key.replace("item.minecraft.", "")
                             .replace("block.minecraft.", "");
-
                     Material material = Material.matchMaterial(minecraftId);
                     if (material != null) {
                         germanToMaterial.put(germanName.toLowerCase(), material);

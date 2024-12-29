@@ -7,3 +7,7 @@ prefix: OpenTopia
 api-version: 1.20
 depend:
   - Essentials
+
+commands:
+  PipeID:
+    desc: Get item ID

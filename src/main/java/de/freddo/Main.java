@@ -1,8 +1,8 @@
 package de.freddo;
 
 import com.earth2me.essentials.Essentials;
-import de.freddo.utiliy.CustomYAML;
-import de.freddo.utiliy.FancyLogger;
+import de.freddo.commands.PipeID;
+import de.freddo.utiliy.*;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -10,6 +10,9 @@ public class Main extends JavaPlugin implements Listener {
 
     private FancyLogger logger;
     private CustomYAML usersFile;
+    private LocalizationManager germanLanguage;
+    private CraftbookVariables craftbookVariables;
+    private PlayerMessage playerMessage;
     Essentials ess;
 
     @Override
@@ -19,14 +22,11 @@ public class Main extends JavaPlugin implements Listener {
         logger = new FancyLogger(this);
         ess = (Essentials) getServer().getPluginManager().getPlugin("Essentials");
 
-        /*
-        Wird evtl. nützlich für die zukunft.
+        germanLanguage = new LocalizationManager();
+        craftbookVariables = new CraftbookVariables();
+        playerMessage = new PlayerMessage();
 
-        usersFile = new CustomYAML(this, "users.yml");
-        if (!usersFile.getConfig().contains("players")) {
-            usersFile.getConfig().set("players", new ArrayList<>());
-            usersFile.save();
-        }*/
+
 
         if (ess == null) {
             logger.log("§cEssentials plugin nicht gefunden, Plugin wird deaktiviert!");
@@ -37,6 +37,8 @@ public class Main extends JavaPlugin implements Listener {
 
         getServer().getPluginManager().registerEvents(new EssentialsHome(this), this);
         getServer().getPluginManager().registerEvents(new AfkCheck(this), this);
+
+        getCommand("pipeid").setExecutor(new PipeID(this));
     }
 
     public Essentials getEss() {
@@ -49,6 +51,18 @@ public class Main extends JavaPlugin implements Listener {
 
     public CustomYAML getUsersFile() {
         return usersFile;
+    }
+
+    public LocalizationManager getGermanLanguage() {
+        return germanLanguage;
+    }
+
+    public CraftbookVariables getCraftbookVariables() {
+        return craftbookVariables;
+    }
+
+    public PlayerMessage getPlayerMessage() {
+        return playerMessage;
     }
 
 

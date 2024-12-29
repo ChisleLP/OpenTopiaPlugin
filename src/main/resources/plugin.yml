@@ -13,3 +13,5 @@ commands:
     desc: Get item ID
   OpenTopia:
     desc: Opentopia
+  otsign:
+    desc: close editor

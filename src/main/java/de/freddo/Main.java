@@ -42,10 +42,13 @@ public class Main extends JavaPlugin implements Listener {
         OpenTopia OT = new OpenTopia(this);
         getServer().getPluginManager().registerEvents(OT, this);
 
+        PipeID pipeID = new PipeID(this);
 
 
-        getCommand("pipeid").setExecutor(new PipeID(this));
+        getCommand("pipeid").setExecutor(pipeID);
+        getCommand("otsign").setExecutor(OT);
         getCommand("OpenTopia").setExecutor(OT);
+
     }
 
     public Essentials getEss() {

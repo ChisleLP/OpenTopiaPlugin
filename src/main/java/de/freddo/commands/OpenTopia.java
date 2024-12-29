@@ -33,30 +33,41 @@ public class OpenTopia implements CommandExecutor, Listener {
             return true;
         }
         Player player = (Player) commandSender;
+        if (s.toLowerCase().equals("opentopia")) {
+            if (args.length > 0) {
+                if (args[0].equalsIgnoreCase("sign")) {
+                    if (player.hasPermission(main.getConfig().getString("openid.permission"))) {
+                        signCommand.put(player.getUniqueId(), String.join(" ", Arrays.copyOfRange(args, 1, args.length)));
+                        String signclick = ChatUtils.colorize(main.getConfig().getString("openid.messages.signclick"));
+                        player.sendMessage(signclick);
 
-        if (args.length > 0) {
-            if (args[0].equalsIgnoreCase("sign")) {
-                if (player.hasPermission(main.getConfig().getString("openid.permission"))) {
-                    signCommand.put(player.getUniqueId(), String.join(" ", Arrays.copyOfRange(args, 1, args.length)));
-                    String signclick = ChatUtils.colorize(main.getConfig().getString("openid.messages.signclick"));
-                    player.sendMessage(signclick);
+                        Boolean enabled = main.getConfig().getBoolean("openid.sign.enabled");
 
-                    Bukkit.getScheduler().runTaskLater(main, () -> {
-                        if (signCommand.containsKey(player.getUniqueId())) {
-                            signCommand.remove(player.getUniqueId());
-                            String signlate = ChatUtils.colorize(main.getConfig().getString("openid.messages.signlate"));
-                            player.sendMessage(signlate);
+                        if (enabled) {
+                            Bukkit.getScheduler().runTaskLater(main, () -> {
+                                if (signCommand.containsKey(player.getUniqueId())) {
+                                    signCommand.remove(player.getUniqueId());
+                                    String signlate = ChatUtils.colorize(main.getConfig().getString("openid.messages.signlate"));
+                                    player.sendMessage(signlate);
+                                }
+                            }, main.getConfig().getInt("openid.sign.timeout", 5) * 20L);
                         }
-                    }, main.getConfig().getInt("openid.sign.timeout", 5) * 20L);
+                        return true;
+                    } else {
+                        String permission = ChatUtils.colorize(main.getConfig().getString("openid.messages.nopermission"));
+                        player.sendMessage(permission);
+                        return true;
+                    }
 
-                    return true;
-                } else {
-                    String permission = ChatUtils.colorize(main.getConfig().getString("openid.messages.nopermission"));
-                    player.sendMessage(permission);
-                    return true;
                 }
-
             }
+        } else if (s.toLowerCase().equals("otsign")) {
+            if (signCommand.containsKey(player.getUniqueId())) {
+                signCommand.remove(player.getUniqueId());
+                String otsignstop = ChatUtils.colorize(main.getConfig().getString("openid.messages.otsignstop"));
+                player.sendMessage(otsignstop);
+            }
+
         }
         return false;
     }
@@ -73,7 +84,11 @@ public class OpenTopia implements CommandExecutor, Listener {
                 sign.setLine(2, signCommand.get(player.getUniqueId()));
                 sign.update();
 
-                signCommand.remove(player.getUniqueId());
+                Boolean enabled = main.getConfig().getBoolean("openid.sign.enabled");
+                if (enabled) {
+                    signCommand.remove(player.getUniqueId());
+                }
+
                 String signregister = ChatUtils.colorize(main.getConfig().getString("openid.messages.signregister"));
                 player.sendMessage(signregister);
             }

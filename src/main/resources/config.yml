@@ -24,7 +24,8 @@ openid:
     nopermission: "&cDu hast keine Berechtigung dafür."
     noitems: "&cEntschuldigung, ich konnte die Items nicht finden. Bitte versuche es erneut."
     noItemInHand: "&cHalte ein Item in der Hand oder nutze /pipeid <Materialname>."
-
+    otsignstop: "&aSchild bearbeitung beendet."
   sign:
+    enabled: false
     timeout: 5 # Timeout in Sekunden.
   permission: "Opentopia.pipeID"

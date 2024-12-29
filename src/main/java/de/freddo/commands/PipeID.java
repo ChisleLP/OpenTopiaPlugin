@@ -23,22 +23,25 @@ public class PipeID implements CommandExecutor {
         if (!(commandSender instanceof Player)) {
             return true;
         }
+        if (s.toLowerCase().equals("pipeid")) {
+            Player player = (Player) commandSender;
+            Material material = args.length == 0 ? getMaterialFromHand(player) : getMaterialFromArgs(player, args);
 
-        Player player = (Player) commandSender;
-        Material material = args.length == 0 ? getMaterialFromHand(player) : getMaterialFromArgs(player, args);
-
-        if (material == null) {
-            if (getMaterialFromHand(player) == null) {
-                String noItemInHand = ChatUtils.colorize(main.getConfig().getString("openid.messages.noItemInHand"));
-                player.sendMessage(noItemInHand);
+            if (material == null) {
+                if (getMaterialFromHand(player) == null) {
+                    String noItemInHand = ChatUtils.colorize(main.getConfig().getString("openid.messages.noItemInHand"));
+                    player.sendMessage(noItemInHand);
+                    return true;
+                }
+                String nofound = ChatUtils.colorize(main.getConfig().getString("openid.messages.noitems"));
+                player.sendMessage(nofound);
                 return true;
             }
-            String nofound = ChatUtils.colorize(main.getConfig().getString("openid.messages.noitems"));
-            player.sendMessage(nofound);
-            return true;
+
+            sendClickableMessages(player, material);
         }
 
-        sendClickableMessages(player, material);
+
 
         return true;
     }

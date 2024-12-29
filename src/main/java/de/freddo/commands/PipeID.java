@@ -28,6 +28,11 @@ public class PipeID implements CommandExecutor {
         Material material = args.length == 0 ? getMaterialFromHand(player) : getMaterialFromArgs(player, args);
 
         if (material == null) {
+            if (getMaterialFromHand(player) == null) {
+                String noItemInHand = ChatUtils.colorize(main.getConfig().getString("openid.messages.noItemInHand"));
+                player.sendMessage(noItemInHand);
+                return true;
+            }
             String nofound = ChatUtils.colorize(main.getConfig().getString("openid.messages.noitems"));
             player.sendMessage(nofound);
             return true;
@@ -41,8 +46,8 @@ public class PipeID implements CommandExecutor {
     private Material getMaterialFromHand(Player player) {
         ItemStack itemHand = player.getInventory().getItemInMainHand();
         if (itemHand == null || itemHand.getType() == Material.AIR) {
-            String noItemInHand = ChatUtils.colorize(main.getConfig().getString("openid.messages.noItemInHand"));
-            player.sendMessage(noItemInHand);
+            //String noItemInHand = ChatUtils.colorize(main.getConfig().getString("openid.messages.noItemInHand"));
+            //player.sendMessage(noItemInHand);
             return null;
         }
         return itemHand.getType();

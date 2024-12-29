@@ -1,28 +1,30 @@
 home:
-  moved: "&6Dein Zuhause wurde erfolgreich auf: %home% verschoben"
+  moved: "&6Dein Zuhause wurde erfolgreich nach: %home% verschoben."
 
 afk:
   events:
-    onPlayerMove: true #Update den Variable, sobald spieler sich bewegt.
-    onPlayerInteract: true #Update sobald der spieler mit Tür/TnT/usw interact.
-    onPlayerChat: true #Update sobald chat.
-    onPlayerCommand: true #update sobald commands
-    onPlayerBreak: false #update sobald blöcke zerstört
-    onPlayerPlace: false #update sobald blöcke plaziert
+    onPlayerMove: true # Aktualisiert den Status, sobald der Spieler sich bewegt.
+    onPlayerInteract: true # Aktualisiert den Status, sobald der Spieler mit Türen, TNT usw. interagiert.
+    onPlayerChat: true # Aktualisiert den Status, sobald der Spieler chattet.
+    onPlayerCommand: true # Aktualisiert den Status, sobald der Spieler Befehle ausführt.
+    onPlayerBreak: false # Aktualisiert den Status, sobald Blöcke zerstört werden.
+    onPlayerPlace: false # Aktualisiert den Status, sobald Blöcke platziert werden.
+
 openid:
   messages:
     header: "&7&l&m----------&7&l[ OpenTopia &7&l]&m----------"
     minecraft-id: "&7Minecraft-ID: &f%id%"
     id: "&7ID: &f%id%"
-    notify: "&fDie ID anklicken zum Kopieren."
+    notify: "&fKlicke auf die ID, um sie zu kopieren."
     footer: "&7&l&m----------&7&l[ OpenTopia &7&l]&m----------"
-    hover: "&6Klicke hier, um den diesen ID zu benutzen"
-    signclick: "&6Linksklick nun auf das Schild"
-    signlate: "&cDer vorgang wurde abgebrochen."
-    signregister: "&aErfolgreich den Schild updated."
-    nopermission: "&cDu hast kein rechte dafür."
-    noitems: "&cEntschuldigung, ich konnte die Items nicht finden. Bitte versucht erneu."
-    noItemInHand: "&cEntweder du hält item in hand, oder nutzt /pipeid <material name>"
+    hover: "&6Klicke hier, um diese ID zu verwenden."
+    signclick: "&6Klicke jetzt mit der linken Maustaste auf das Schild."
+    signlate: "&cDer Vorgang wurde abgebrochen."
+    signregister: "&aDas Schild wurde erfolgreich aktualisiert."
+    nopermission: "&cDu hast keine Berechtigung dafür."
+    noitems: "&cEntschuldigung, ich konnte die Items nicht finden. Bitte versuche es erneut."
+    noItemInHand: "&cHalte ein Item in der Hand oder nutze /pipeid <Materialname>."
+
   sign:
-    timeout: 5
+    timeout: 5 # Timeout in Sekunden.
   permission: "Opentopia.pipeID"

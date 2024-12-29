@@ -1,6 +1,7 @@
 package de.freddo.commands;
 
 import de.freddo.Main;
+import de.freddo.utiliy.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
@@ -35,17 +36,26 @@ public class OpenTopia implements CommandExecutor, Listener {
 
         if (args.length > 0) {
             if (args[0].equalsIgnoreCase("sign")) {
-                signCommand.put(player.getUniqueId(), String.join(" ", Arrays.copyOfRange(args, 1, args.length)));
-                player.sendMessage("Linksklick jetzt einen Schild!");
+                if (player.hasPermission(main.getConfig().getString("openid.permission"))) {
+                    signCommand.put(player.getUniqueId(), String.join(" ", Arrays.copyOfRange(args, 1, args.length)));
+                    String signclick = ChatUtils.colorize(main.getConfig().getString("openid.messages.signclick"));
+                    player.sendMessage(signclick);
 
-                Bukkit.getScheduler().runTaskLater(main, () -> {
-                    if (signCommand.containsKey(player.getUniqueId())) {
-                        signCommand.remove(player.getUniqueId());
-                        player.sendMessage("Zeit ist abgelaufen!");
-                    }
-                }, 200L);
+                    Bukkit.getScheduler().runTaskLater(main, () -> {
+                        if (signCommand.containsKey(player.getUniqueId())) {
+                            signCommand.remove(player.getUniqueId());
+                            String signlate = ChatUtils.colorize(main.getConfig().getString("openid.messages.signlate"));
+                            player.sendMessage(signlate);
+                        }
+                    }, main.getConfig().getInt("openid.sign.timeout", 5) * 20L);
 
-                return true;
+                    return true;
+                } else {
+                    String permission = ChatUtils.colorize(main.getConfig().getString("openid.messages.nopermission"));
+                    player.sendMessage(permission);
+                    return true;
+                }
+
             }
         }
         return false;
@@ -64,7 +74,8 @@ public class OpenTopia implements CommandExecutor, Listener {
                 sign.update();
 
                 signCommand.remove(player.getUniqueId());
-                player.sendMessage("Schild erfolgreich aktualisiert!");
+                String signregister = ChatUtils.colorize(main.getConfig().getString("openid.messages.signregister"));
+                player.sendMessage(signregister);
             }
         }
     }

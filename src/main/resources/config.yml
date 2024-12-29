@@ -1,5 +1,5 @@
 home:
-  moved: "§6Dein Zuhause wurde erfolgreich auf: %home% verschoben"
+  moved: "&6Dein Zuhause wurde erfolgreich auf: %home% verschoben"
 
 afk:
   events:
@@ -9,3 +9,20 @@ afk:
     onPlayerCommand: true #update sobald commands
     onPlayerBreak: false #update sobald blöcke zerstört
     onPlayerPlace: false #update sobald blöcke plaziert
+openid:
+  messages:
+    header: "&7&l&m----------&7&l[ OpenTopia &7&l]&m----------"
+    minecraft-id: "&7Minecraft-ID: &f%id%"
+    id: "&7ID: &f%id%"
+    notify: "&fDie ID anklicken zum Kopieren."
+    footer: "&7&l&m----------&7&l[ OpenTopia &7&l]&m----------"
+    hover: "&6Klicke hier, um den diesen ID zu benutzen"
+    signclick: "&6Linksklick nun auf das Schild"
+    signlate: "&cDer vorgang wurde abgebrochen."
+    signregister: "&aErfolgreich den Schild updated."
+    nopermission: "&cDu hast kein rechte dafür."
+    noitems: "&cEntschuldigung, ich konnte die Items nicht finden. Bitte versucht erneu."
+    noItemInHand: "&cEntweder du hält item in hand, oder nutzt /pipeid <material name>"
+  sign:
+    timeout: 5
+  permission: "Opentopia.pipeID"

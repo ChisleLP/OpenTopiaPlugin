@@ -1,6 +1,7 @@
 package de.freddo;
 
 import com.earth2me.essentials.Essentials;
+import de.freddo.utiliy.ChatUtils;
 import net.ess3.api.IUser;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -32,7 +33,8 @@ public class EssentialsHome implements Listener {
 
             if (homes.contains(homeName)){
                 event.setCancelled(true);
-                player.sendMessage(plugin.getConfig().getString("home.moved").replace("%home%", homeName));
+                String homeMessage = ChatUtils.colorize(plugin.getConfig().getString("home.moved"));
+                player.sendMessage(homeMessage.replace("%home%", homeName));
 
                 iUser.setHome(homeName, player.getLocation());
             }

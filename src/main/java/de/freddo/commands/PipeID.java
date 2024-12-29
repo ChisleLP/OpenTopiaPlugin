@@ -1,6 +1,7 @@
 package de.freddo.commands;
 
 import de.freddo.Main;
+import de.freddo.utiliy.ChatUtils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -27,7 +28,8 @@ public class PipeID implements CommandExecutor {
         Material material = args.length == 0 ? getMaterialFromHand(player) : getMaterialFromArgs(player, args);
 
         if (material == null) {
-            player.sendMessage("Sorry, no items found.");
+            String nofound = ChatUtils.colorize(main.getConfig().getString("openid.messages.noitems"));
+            player.sendMessage(nofound);
             return true;
         }
 
@@ -39,7 +41,8 @@ public class PipeID implements CommandExecutor {
     private Material getMaterialFromHand(Player player) {
         ItemStack itemHand = player.getInventory().getItemInMainHand();
         if (itemHand == null || itemHand.getType() == Material.AIR) {
-            player.sendMessage("Item in hand halten!");
+            String noItemInHand = ChatUtils.colorize(main.getConfig().getString("openid.messages.noItemInHand"));
+            player.sendMessage(noItemInHand);
             return null;
         }
         return itemHand.getType();
@@ -58,23 +61,36 @@ public class PipeID implements CommandExecutor {
 
     private void sendClickableMessages(Player player, Material material) {
         String materialKey = material.getKey().toString();
+        String header = ChatUtils.colorize(main.getConfig().getString("openid.messages.header"));
+        String minecraftIdMessage = ChatUtils.colorize(main.getConfig().getString("openid.messages.minecraft-id"));
+        String idMessage = ChatUtils.colorize(main.getConfig().getString("openid.messages.id"));
+        String notify = ChatUtils.colorize(main.getConfig().getString("openid.messages.notify"));
+        String footer = ChatUtils.colorize(main.getConfig().getString("openid.messages.footer"));
+        String hover = ChatUtils.colorize(main.getConfig().getString("openid.messages.hover"));
+
+        player.sendMessage(header);
+
         main.getPlayerMessage().sendClickableMessage(
                 player,
-                "Minecraft-ID: " + materialKey,
+                minecraftIdMessage.replace("%id%", materialKey),
                 ClickEvent.Action.RUN_COMMAND,
                 "/opentopia sign " + materialKey,
-                "Drücke hier um diese Variable auszuwählen."
+                hover
         );
 
         String result = main.getCraftbookVariables().findVariableByValue(materialKey);
         if (!result.contains("0")) {
             main.getPlayerMessage().sendClickableMessage(
                     player,
-                    "ID: %" + result + "%",
+                    idMessage.replace("%id%", "%"+result+"%"),
                     ClickEvent.Action.RUN_COMMAND,
                     "/opentopia sign %" + result + "%",
-                    "Drücke hier um diese Variable auszuwählen."
+                    hover
             );
         }
+        player.sendMessage(notify);
+        player.sendMessage(footer);
     }
+
+
 }
